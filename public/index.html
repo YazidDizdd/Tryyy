@@ -43,7 +43,6 @@
     }
 
     input[type="text"],
-    input[type="number"],
     select {
       width: 100%;
       padding: 10px;
@@ -51,9 +50,14 @@
       border: 1px solid #333;
       border-radius: 10px;
       box-sizing: border-box;
-      background-color: #2f2f3f;
-      color: #e0e0e0;
+      background-color: #ffffff; /* Arrière-plan blanc pour le prompt */
+      color: #333;
       font-size: 1rem;
+    }
+
+    input[type="number"] {
+      width: 60px; /* Taille réduite de l'input pour la valeur numérique */
+      text-align: center;
     }
 
     input[type="submit"] {
@@ -71,11 +75,17 @@
     input[type="submit"]:hover {
       background-color: #9b59b6;
     }
-    input#prompt{
-      font-size:1.2rem;
-      color: #333;
-      opacity: 1;
-        }
+
+    .slider-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .slider {
+      flex-grow: 1;
+      margin-right: 10px;
+    }
 
     .optional-parameters {
       display: none;
@@ -98,6 +108,22 @@
 
     .toggle-button:hover {
       color: #9b59b6;
+    }
+
+    .validate-button {
+      background-color: #8e44ad;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .validate-button:hover {
+      background-color: #9b59b6;
     }
 
     .image-container {
@@ -159,7 +185,8 @@
       }
 
       .toggle-button,
-      input[type="submit"] {
+      input[type="submit"],
+      .validate-button {
         font-size: 1rem;
       }
     }
@@ -189,13 +216,21 @@
     
     <div class="optional-parameters" id="optional-parameters">
       <label for="steps">Steps:</label>
-      <input type="number" id="steps" name="steps">
+      <div class="slider-container">
+        <input type="range" id="steps" name="steps" min="1" max="100" value="50" class="slider">
+        <input type="number" id="steps-value" value="50" readonly>
+      </div>
       
       <label for="cfg_scale">CFG Scale:</label>
-      <input type="number" id="cfg_scale" name="cfg_scale">
+      <div class="slider-container">
+        <input type="range" id="cfg_scale" name="cfg_scale" min="1" max="20" value="10" class="slider">
+        <input type="number" id="cfg_scale-value" value="10" readonly>
+      </div>
       
       <label for="loras">Loras:</label>
       <input type="text" id="loras" name="loras" placeholder="1:0.5,2:1">
+      
+      <button type="button" class="validate-button" onclick="validateOptionalParams()">Validate Optional Parameters</button>
     </div>
     
     <input type="submit" value="Generate Image">
@@ -214,6 +249,20 @@
       const optionalParams = document.getElementById('optional-parameters');
       optionalParams.style.display = optionalParams.style.display === 'none' || optionalParams.style.display === '' ? 'block' : 'none';
     }
+
+    function validateOptionalParams() {
+      document.getElementById('steps').disabled = false;
+      document.getElementById('cfg_scale').disabled = false;
+      document.getElementById('loras').disabled = false;
+    }
+
+    document.getElementById('steps').addEventListener('input', function() {
+      document.getElementById('steps-value').value = this.value;
+    });
+
+    document.getElementById('cfg_scale').addEventListener('input', function() {
+      document.getElementById('cfg_scale-value').value = this.value;
+    });
 
     function generateImage(event) {
       event.preventDefault();
