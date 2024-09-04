@@ -43,6 +43,7 @@
     }
 
     input[type="text"],
+    input[type="number"],
     select {
       width: 100%;
       padding: 10px;
@@ -50,14 +51,15 @@
       border: 1px solid #333;
       border-radius: 10px;
       box-sizing: border-box;
-      background-color: #ffffff; /* Arrière-plan blanc pour le prompt */
-      color: #333;
+      background-color: #2f2f3f;
+      color: #e0e0e0;
       font-size: 1rem;
     }
 
-    input[type="number"] {
-      width: 60px; /* Taille réduite de l'input pour la valeur numérique */
-      text-align: center;
+    input[type="text"] { 
+      background-color: #f2f2f6;
+      border-radius: 13px;
+      color: #252424;
     }
 
     input[type="submit"] {
@@ -74,17 +76,6 @@
 
     input[type="submit"]:hover {
       background-color: #9b59b6;
-    }
-
-    .slider-container {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .slider {
-      flex-grow: 1;
-      margin-right: 10px;
     }
 
     .optional-parameters {
@@ -110,34 +101,17 @@
       color: #9b59b6;
     }
 
-    .validate-button {
-      background-color: #8e44ad;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 1rem;
-      margin-top: 10px;
-    }
-
-    .validate-button:hover {
-      background-color: #9b59b6;
-    }
-
     .image-container {
       background-color: #1c1c3b;
       padding: 15px;
       border-radius: 20px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
       width: 100%;
-      max-width: 500px;
       height: 100%;
-      max-height:600px;
-      overflow: hidden;
+      max-width: 500px;
       text-align: center;
       margin-top: 20px;
+      max-height: 600px;
       display: none; /* Cacher initialement */
     }
 
@@ -145,7 +119,7 @@
       max-width: 100%;
       max-height: 100%;
       height: auto;
-      width:auto;
+      width: auto;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     }
@@ -185,8 +159,7 @@
       }
 
       .toggle-button,
-      input[type="submit"],
-      .validate-button {
+      input[type="submit"] {
         font-size: 1rem;
       }
     }
@@ -197,46 +170,68 @@
   
   <form action="/generate-image" method="get" onsubmit="return generateImage(event)">
     <label for="prompt">Prompt</label>
-    <input type="text" id="prompt" name="prompt" required>
+    <input type="text" id="prompt" name="prompt" placeholder="Entrez votre prompt..." required>
     
     <label for="model">Model</label>
     <select id="model" name="modelIndex">
-      <option value="1">Model 1</option>
-      <option value="2">Model 2</option>
-      <option value="3">Model 3</option>
+      <option value="1">Animagine XL-3.1</option>
+<option value="2">Animagine XL-V3</option>
+<option value="3">4thtail Anime Hentai-v0.4.5</option>
+<option value="4">CAT-Citron Anime Treasure-SDXL</option>
+<option value="5">AAMXL Anime Mix-v1.0</option>
+<option value="6">NUKE-Disney Pixar Style SDXL-v1</option>
+<option value="7">Comics Characters Database UNCENSORED-3D</option>
+<option value="8">FLUX.1-dev-fp8</option>
+<option value="9">Flux Unchained Artful NSFWcapableflux.dtuned-T5_8x8V1.1</option>
+<option value="10">FLUX HYPERTRAINED-DREAMDIFFUSION-BYDICE-V1</option>
+<option value="11">Sudachi-V1</option>
+<option value="12">Oxalis Anime Hentai Model-OAH-1</option>
+<option value="13">Perfect World V6-V6</option>
+<option value="14">Chillout Mix-Ni</option>
+<option value="15">Astr Anime-6.0</option>
+<option value="16">Meina Hentai v3-3</option>
+<option value="17">3D Cartoon Vision-V1</option>
+<option value="18">7th anime XL B</option>
+<option value="19">Vivaldi Xl Open Dalle3 Anime</option>
+<option value="20">Kohaku Xl Epsilon</option>
+<option value="21">7th anime XL A</option>
+<option value="30">Animage-Xl</option>
+
     </select>
     
-    <label for="ratio">Ratio</label>
+    <label for="ratio">Ratio:</label>
     <select id="ratio" name="ratio">
-      <option value="1:1">1:1</option>
-      <option value="9:7">9:7</option>
+      <option value="1:1">1:1 (Carré)</option>
+<option value="9:7">9:7 (Paysage)</option>
+<option value="7:9">7:9 (Portrait)</option>
+<option value="19:13">19:13 (Paysage)</option>
+<option value="13:19">13:19 (Portrait)</option>
+<option value="7:4">7:4 (Large)</option>
+<option value="4:7">4:7 (Grand)</option>
+<option value="12:5">12:5 (Large)</option>
+<option value="5:12">5:12 (Grand)</option>
+<option value="3:2">3:2 (Paysage)</option>
+<option value="2:3">2:3 (Portrait)</option>
+
     </select>
     
     <button type="button" class="toggle-button" onclick="toggleOptionalParams()">Optional Parameters &#9660;</button>
     
     <div class="optional-parameters" id="optional-parameters">
-      <label for="steps">Steps:</label>
-      <div class="slider-container">
-        <input type="range" id="steps" name="steps" min="1" max="100" value="50" class="slider">
-        <input type="number" id="steps-value" value="50" readonly>
-      </div>
+      <label for="steps">Steps (1-35)</label>
+      <input type="number" id="steps" name="steps">
       
-      <label for="cfg_scale">CFG Scale:</label>
-      <div class="slider-container">
-        <input type="range" id="cfg_scale" name="cfg_scale" min="1" max="20" value="10" class="slider">
-        <input type="number" id="cfg_scale-value" value="10" readonly>
-      </div>
+      <label for="cfg_scale">CFG Scale (1-10)</label>
+      <input type="number" id="cfg_scale" name="cfg_scale">
       
-      <label for="loras">Loras:</label>
-      <input type="text" id="loras" name="loras" placeholder="1:0.5,2:1">
-      
-      <button type="button" class="validate-button" onclick="validateOptionalParams()">Validate Optional Parameters</button>
+      <label for="loras">Loras</label>
+      <input type="text" id="loras" name="loras" placeholder="Ex: 1:0.5,2:1">
     </div>
     
     <input type="submit" value="Generate Image">
   </form>
 
-  <div class="loading-message" id="loading-message">Please wait, generating image...</div>
+  <div class="loading-message" id="loading-message">Veuillez patientez, Génération de l'image en cours...</div>
   <div class="loading-animation" id="loading-animation"></div>
 
   <div class="image-container" id="image-container">
@@ -249,20 +244,6 @@
       const optionalParams = document.getElementById('optional-parameters');
       optionalParams.style.display = optionalParams.style.display === 'none' || optionalParams.style.display === '' ? 'block' : 'none';
     }
-
-    function validateOptionalParams() {
-      document.getElementById('steps').disabled = false;
-      document.getElementById('cfg_scale').disabled = false;
-      document.getElementById('loras').disabled = false;
-    }
-
-    document.getElementById('steps').addEventListener('input', function() {
-      document.getElementById('steps-value').value = this.value;
-    });
-
-    document.getElementById('cfg_scale').addEventListener('input', function() {
-      document.getElementById('cfg_scale-value').value = this.value;
-    });
 
     function generateImage(event) {
       event.preventDefault();
