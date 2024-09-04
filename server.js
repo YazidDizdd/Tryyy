@@ -92,6 +92,7 @@ const loras = {
   56: "ExtremelyRealisticStyleLoRA-V1.0",
   57: "AddUltraDetails-v1",
   58: "Shinyoiledskin2.0LyCORISLoRA-v2.0LyCORI",
+  59:  "xl_more_art-fullxl_realEnhancer-v1",
 };
 
 const models = {
@@ -102,9 +103,9 @@ const models = {
     pre_prompt: "masterpiece, best quality, very aesthetic, absurdres,"
   },
   30: { name: "AnimagineXL-3.1",
-    cfg_scale: 8,
-    steps: 27,
-    negative_prompt: "lowres, (bad), text, error, fewer, extra, missing, worst quality, jpeg artifacts, low quality, watermark, unfinished, displeasing, oldest, early, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract]",
+    cfg_scale: 7,
+    steps: 28,
+    negative_prompt: "FastNegative, lowres, (bad), text, logo, blurry,  error,fewer digits, extra digit, missing fingers, worst quality,jpeg artifacts, low quality, watermark, unfinished, displeasing,oldest, early, chromatic aberration, signature, extra digits,artistic error, username, scan, [abstract],photo, deformed, black and white, realism, disfigured,low contrast, lipgloss, curly hair, parted bangs  sketch,(nose:0.9), colored inner hair, (child, loli), (key:1.2),blush,key necklace, forehead, bangle, sweatband",
     pre_prompt: " "
   },
 
