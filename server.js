@@ -99,8 +99,15 @@ const models = {
     cfg_scale: 8,
     steps: 27,
     negative_prompt: "nsfw, lowres, (bad), text, error, fewer, extra, missing, worst quality, jpeg artifacts, low quality, watermark, unfinished, displeasing, oldest, early, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract]",
+    pre_prompt: "masterpiece, best quality, very aesthetic, absurdres,"
+  },
+  30: { name: "AnimagineXL-3.1",
+    cfg_scale: 8,
+    steps: 27,
+    negative_prompt: "lowres, (bad), text, error, fewer, extra, missing, worst quality, jpeg artifacts, low quality, watermark, unfinished, displeasing, oldest, early, chromatic aberration, signature, extra digits, artistic error, username, scan, [abstract]",
     pre_prompt: " "
   },
+
 2: { name: "AnimagineXL-V3",
     cfg_scale: 7,
     steps: 30,
@@ -198,10 +205,10 @@ const models = {
     pre_prompt: "((masterpiece:1.2), best quality,)"
   },
 18: {
-    name: "OpenDalleTurbo-V1.1",
-    cfg_scale: 6,
-    steps: 27,
-    negative_prompt: "bad quality",
+    name: "7thanimeXLB-v1.0",
+    cfg_scale: 7,
+    steps: 25,
+    negative_prompt: "(worst quality:1.6),(low quality:1.4),(normal quality:1.2),lowres,jpeg artifacts,long neck,long body,bad anatomy,bad hands,text,error,missing fingers,extra digit,fewer digits,cropped,signature,watermark,username,artist name,",
     pre_prompt: " "
 },
   19: {
@@ -212,10 +219,17 @@ const models = {
     pre_prompt: " "
 },
 20: {
-    name: "OpenDallev1.1-1.1",
+    name: "Kohaku-XL-psilonRev2-ep5",
     cfg_scale: 6,
     steps: 27,
-    negative_prompt: "bad quality",
+    negative_prompt: "lowres bad_anatomy bad_hands text error missing_fingers extra_digit fewer_digits cropped worst_quality low_quality normal_quality jpeg_artifacts signature watermark username blurry artist_name,multiple girls,multiple views,",
+    pre_prompt: " "
+},
+ 21: {
+    name: "7thanimeXLA-v1.0",
+    cfg_scale: 7,
+    steps: 25,
+    negative_prompt: "(worst quality:1.6),(low quality:1.4),(normal quality:1.2),lowres,jpeg artifacts,long neck,long body,bad anatomy,bad hands,text,error,missing fingers,extra digit,fewer digits,cropped,signature,watermark,username,artist name,",
     pre_prompt: " "
 },
 
